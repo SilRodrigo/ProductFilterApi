@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<!-- 
+/* 
+ * @author Rodrigo Silva
+ * @copyright Copyright (c) 2022 Rodrigo Silva (https://github.com/SilRodrigo)
+ * @package Rsilva_Base
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Rsilva\ProductFilterApi\Api\ProductsProviderInterface" type="Rsilva\ProductFilterApi\Model\Api\ProductsProvider"/>    
+</config>

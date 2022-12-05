@@ -1,0 +1,20 @@
+{
+    "name": "rsilva/product-filter-api",
+    "description": "Product Filter Api by https://github.com/SilRodrigo",
+    "require": {
+        "php": ">=7.4",
+        "rsilva/base": ">=1.0.0"
+    },
+    "type": "magento2-module",
+    "license": [
+        "MIT"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Rsilva\\ProductFilterApi\\": ""
+        }
+    }
+}

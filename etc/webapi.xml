@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/* 
+ * @author Rodrigo Silva
+ * @copyright Copyright (c) 2022 Rodrigo Silva (https://github.com/SilRodrigo)
+ * @package Rsilva_Base
+ */
+ -->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/rsilva/product/list" method="POST">
+        <service class="Rsilva\ProductFilterApi\Api\ProductsProviderInterface" method="getProductList"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+</routes>
