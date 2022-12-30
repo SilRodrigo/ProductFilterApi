@@ -22,12 +22,12 @@ define([], function () {
          * @param {Number} price
          * @param {Number} special_price
          * @param {string} description
-         * @param {string} formated_price
-         * @param {string} formated_special_price
+         * @param {string} formatted_price
+         * @param {string} formatted_special_price
          */
         constructor({
             entity_id, sku, name, type_id, complete_image_url, complete_page_url, price = 0,
-            special_price = 0, description = '', short_description = '', formated_price, formated_special_price }) {
+            special_price = 0, description = '', short_description = '', formatted_price, formatted_special_price }) {
             this.entity_id = entity_id;
             this.sku = sku;
             this.name = name;
@@ -36,8 +36,8 @@ define([], function () {
             this.complete_page_url = complete_page_url;
             this.price = price;
             this.special_price = special_price;
-            this.formated_price = formated_price;
-            this.formated_special_price = formated_special_price;
+            this.formatted_price = formatted_price;
+            this.formatted_special_price = formatted_special_price;
             this.description = description;
             this.short_description = short_description;
         }

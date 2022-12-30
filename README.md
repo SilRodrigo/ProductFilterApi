@@ -18,8 +18,8 @@
             "complete_page_url": "https://rsilva.vitrine/test.html",
             "price": "12.990000",
             "special_price": null,
-            "formated_price": "US$ 12,99",
-            "formated_special_price": "US$ 0,00",
+            "formatted_price": "US$ 12,99",
+            "formatted_special_price": "US$ 0,00",
             "description": ""
         }
     ],
