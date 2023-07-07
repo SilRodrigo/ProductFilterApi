@@ -1,7 +1,7 @@
 /* 
  * @author Rodrigo Silva
- * @copyright Copyright (c) 2022 Rodrigo Silva (https://github.com/SilRodrigo)
- * @package Rsilva_Base
+ * @copyright Copyright (c) 2023 Rodrigo Silva (https://github.com/SilRodrigo)
+ * @package Rsilva_ProductFilterApi
  */
 
 define([
@@ -75,6 +75,14 @@ define([
             if (Number.isInteger(value) && value > 1) this.#page_size = value;
         }
 
+        startLoading() {
+            $('body').trigger('processStart');
+        }
+
+        stopLoading() {
+            $('body').trigger('processStop');
+        }
+
         getFilterConditions() {
             return Filter.CONDITIONS;
         }
@@ -121,18 +129,20 @@ define([
             this.#filter_groups = [];
         }
 
+        resetPage() {
+            this.#page = 1;
+        }
+
         /**
          * @param {string} name 
          * @param {Function} callback          
          */
         queryProductByName(name, callback, no_load) {
-            if (this.isRequesting) return;            
+            if (this.isRequesting) return;
             this.clearFilterGroups();
+            this.resetPage();
             this.addFilterToGroup(this.prepareFilterByName(name));
-            this.request(no_load).then(response => {
-                if (callback) callback(response);
-                $('body').trigger('processStop');
-            });
+            return this.request(no_load);
         }
 
         /**
@@ -141,12 +151,31 @@ define([
          */
         getProductById(id, no_load) {
             this.clearFilterGroups();
+            this.resetPage();
             this.addFilterToGroup(this.createFilter('entity_id', this.getFilterConditions().EQUAL, id, FilterGroup.TYPE.ATTRIBUTE));
             return this.request(no_load);
         }
 
-        /*  */
+        previousPage(no_load) {
+            if (this.#page < 2) return;
+            this.#page--;
+            return this.request(no_load);
+        }
 
+        /**
+         * @param {boolean} no_load 
+         * @param {Function} callback 
+         */
+        nextPage(no_load) {
+            this.#page++;
+            return this.request(no_load);
+        }
+
+        /**
+         * Returns the serialized data
+         * 
+         * @returns {Object}
+         */
         getRequestBody() {
             return JSON.stringify({
                 filterData: JSON.stringify(this.#filter_groups),
@@ -159,7 +188,7 @@ define([
         async request(no_load) {
             if (this.isRequesting && !no_load) return;
             this.isRequesting = true;
-            if (!no_load) $('body').trigger('processStart');
+            if (!no_load) this.startLoading();
             let response = await fetch(this.#CONFIG.ENDPOINT, {
                 method: this.#CONFIG.METHOD,
                 headers: this.#CONFIG.HEADERS,
